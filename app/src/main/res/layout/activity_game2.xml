@@ -27,7 +27,8 @@
         android:layout_above="@+id/player"
         android:layout_toLeftOf="@+id/bomb"
         android:layout_toStartOf="@+id/bomb"
-        app:srcCompat="@drawable/birdfly" />
+        app:srcCompat="@drawable/birdfly"
+        android:contentDescription="@string/birdimage" />
 
 
     <ImageView
@@ -37,7 +38,9 @@
         android:layout_above="@+id/bird1"
         android:layout_toLeftOf="@+id/bird2"
         android:layout_toStartOf="@+id/bird2"
-        app:srcCompat="@drawable/birdfly" />
+        app:srcCompat="@drawable/birdfly"
+        android:contentDescription="@string/birdimage" />
+
 
     <ImageView
         android:id="@+id/bird2"
@@ -46,7 +49,9 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/imageView3"
-        app:srcCompat="@drawable/birdfly" />
+        app:srcCompat="@drawable/birdfly"
+        android:contentDescription="@string/birdimage" />
+
 
     <ImageButton
         android:id="@+id/up"
@@ -58,7 +63,8 @@
         android:background="@drawable/circle_bg"
         android:clickable="true"
         android:longClickable="true"
-        app:srcCompat="@android:drawable/arrow_up_float" />
+        app:srcCompat="@android:drawable/arrow_up_float"
+        android:contentDescription="@string/up_button" />
 
     <ImageButton
         android:id="@+id/bomb"
@@ -69,7 +75,8 @@
         android:layout_alignParentRight="true"
         android:background="@drawable/circle_bg"
         android:onClick="bomb"
-        app:srcCompat="@android:drawable/presence_invisible" />
+        app:srcCompat="@android:drawable/presence_invisible"
+        android:contentDescription="@string/bomb" />
 
 
     <ImageView
@@ -79,7 +86,8 @@
         android:layout_alignTop="@+id/bomb"
         android:layout_toEndOf="@+id/player"
         android:layout_toRightOf="@+id/player"
-        app:srcCompat="@android:drawable/progress_horizontal" />
+        app:srcCompat="@android:drawable/progress_horizontal"
+        android:contentDescription="@string/bullet" />
 
     <ImageView
         android:id="@+id/jetpack"
@@ -97,7 +105,8 @@
         android:layout_height="wrap_content"
         android:layout_toEndOf="@+id/progressBar3"
         android:layout_toRightOf="@+id/progressBar3"
-        app:srcCompat="@drawable/jetpack" />
+        app:srcCompat="@drawable/jetpack"
+        android:contentDescription="" />
 
     <ImageView
         android:id="@+id/imageView3"
@@ -106,7 +115,8 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:elevation="1dp"
-        app:srcCompat="@drawable/birdcage" />
+        app:srcCompat="@drawable/birdcage"
+        android:contentDescription="" />
 
     <ImageView
         android:id="@+id/imageView4"
@@ -116,7 +126,8 @@
         android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/bird1"
         android:background="@drawable/like"
-        android:elevation="1dp" />
+        android:elevation="1dp"
+        android:contentDescription="" />
 
     <TextView
         android:id="@+id/score"

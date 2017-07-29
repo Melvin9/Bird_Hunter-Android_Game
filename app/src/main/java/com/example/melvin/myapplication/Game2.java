@@ -1,41 +1,30 @@
 package com.example.melvin.myapplication;
 
-import android.app.Activity;
-import android.app.backup.SharedPreferencesBackupHelper;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
-import android.media.Image;
-import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.util.Date;
 import java.util.Random;
 import java.util.TimerTask;
-import java.util.logging.Handler;
-import java.util.logging.LogRecord;
 
 public class Game2 extends AppCompatActivity {
     ImageView b1, b2,b3, bullet_shots;
     boolean down_click;
     TextView gamer,sc;
     int score=1;
-    java.util.Timer t4, birdTimer, t8, t9,t10;
+    java.util.Timer t4, birdTimer, t8, t9;
     float bulletX;
     RelativeLayout main;
     ImageButton up;float bullet_original_Y;
