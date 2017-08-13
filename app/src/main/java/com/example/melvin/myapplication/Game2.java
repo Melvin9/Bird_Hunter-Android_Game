@@ -16,11 +16,13 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.Random;
 import java.util.TimerTask;
 
 public class Game2 extends AppCompatActivity {
-    ImageView b1, b2,b3, bullet_shots;
+    ImageView b1, b2,b3,b4, bullet_shots;
     boolean down_click;
     TextView gamer,sc;
     int score=1;
@@ -48,6 +50,17 @@ public class Game2 extends AppCompatActivity {
         b1 = (ImageView) findViewById(R.id.bird1);
         b2 = (ImageView) findViewById(R.id.bird2);
         b3 = (ImageView) findViewById(R.id.bird3);
+        b4=(ImageView) findViewById(R.id.bird4);
+        Glide.with(Game2.this)
+                .asGif().load((R.drawable.birdfly)).into(b1);
+        Glide.with(Game2.this)
+                .asGif().load((R.drawable.birdfly)).into(b2);
+        Glide.with(Game2.this)
+                .asGif().load((R.drawable.birdfly)).into(b3);
+        Glide.with(Game2.this)
+                .asGif().load((R.drawable.birdfly)).into(b4);
+
+
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         progressBar1 = (ProgressBar) findViewById(R.id.progressBar3);
         bullet_shots = (ImageView) findViewById(R.id.bullet);
@@ -61,6 +74,7 @@ public class Game2 extends AppCompatActivity {
         jet.setVisibility(View.INVISIBLE);
         progressBar.setProgress(progress);
         progressBar1.setProgress(progress1);
+
        up.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -208,6 +222,18 @@ public class Game2 extends AppCompatActivity {
         }
 
     };
+    BroadcastReceiver receiver6 = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            b4.setX(b4.getX() - 10);
+            if (b4.getX() < 0) {
+                progress-=10;
+                progressBar.setProgress(progress);
+                b4.setX(main.getWidth());
+            }
+        }
+
+    };
 
     @Override
     protected void onResume() {
@@ -218,6 +244,7 @@ public class Game2 extends AppCompatActivity {
                                @Override
                                public void run() {
                                    sendBroadcast(new Intent("BIRD2"));
+                                   sendBroadcast(new Intent("BIRD4"));
                                    if (++i%2 == 0)
                                        sendBroadcast(new Intent("BIRD1"));
 
@@ -234,6 +261,7 @@ public class Game2 extends AppCompatActivity {
         registerReceiver(receiver2, new IntentFilter("BIRD2"));
         registerReceiver(receiver1, new IntentFilter("BIRD1"));
         registerReceiver(receiver, new IntentFilter("BOMB"));
+        registerReceiver(receiver6, new IntentFilter("BIRD4"));
     }
 
 
@@ -252,6 +280,8 @@ public class Game2 extends AppCompatActivity {
         unregisterReceiver(receiver1);
         unregisterReceiver(receiver3);
         unregisterReceiver(receiver2);
+        unregisterReceiver(receiver6);
+
     }
 
 
@@ -283,6 +313,13 @@ public class Game2 extends AppCompatActivity {
                 b3.setY(r);
                 sc.setText(score++ +"");
             }
+        if (bullet_shots.getY() <= b4.getY() + b4.getHeight() && bullet_shots.getY() >= b4.getY() && bullet_shots.getX() > b4.getX()) {
+            change();
+            int r = new Random().nextInt(main.getHeight() - 400);
+            b4.setX(main.getWidth());
+            b4.setY(r);
+            sc.setText(score++ +"");
+        }
 
         }
     public void change() {
