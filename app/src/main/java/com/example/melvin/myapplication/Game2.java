@@ -13,6 +13,8 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -39,14 +41,19 @@ public class Game2 extends AppCompatActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        setContentView(R.layout.activity_game2);
-        ActionBar actionBar= getSupportActionBar();
-        if (actionBar!=null){
-            actionBar.hide();
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+ActionBar actionbar=getSupportActionBar();
+        if(actionbar!=null){
+            actionbar.hide();
         }
+
+
+
+        setContentView(R.layout.activity_game2);;
         sc=(TextView)findViewById(R.id.score);
         gamer = (TextView) findViewById(R.id.player);
         up = (ImageButton) findViewById(R.id.up);
@@ -252,7 +259,7 @@ public class Game2 extends AppCompatActivity {
                 builder = new AlertDialog.Builder(Game2.this);
             }
             builder.setTitle("Game Over")
-                    .setMessage("Your score = "+score)
+                    .setMessage("Your score is "+score)
                     .setCancelable(false)
                     .setNegativeButton("Exit", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
