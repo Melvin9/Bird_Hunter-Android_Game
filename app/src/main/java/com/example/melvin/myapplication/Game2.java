@@ -2,11 +2,14 @@ package com.example.melvin.myapplication;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -191,8 +194,7 @@ public class Game2 extends AppCompatActivity {
         public void onReceive(Context context, Intent intent) {
             b1.setX(b1.getX() - 10);
             if (b1.getX() < 0) {
-                progress-=10;
-                progressBar.setProgress(progress);
+                gameover();
                 b1.setX(main.getWidth());
             }
         }
@@ -203,8 +205,7 @@ public class Game2 extends AppCompatActivity {
         public void onReceive(Context context, Intent intent) {
             b2.setX(b2.getX() - 10);
             if (b2.getX() < 0) {
-                progress-=10;
-                progressBar.setProgress(progress);
+                gameover();
                 b2.setX(main.getWidth());
             }
         }
@@ -215,8 +216,7 @@ public class Game2 extends AppCompatActivity {
         public void onReceive(Context context, Intent intent) {
             b3.setX(b3.getX() - 10);
             if (b3.getX() < 0) {
-                progress-=10;
-                progressBar.setProgress(progress);
+                gameover();
                 b3.setX(main.getWidth());
             }
         }
@@ -227,13 +227,43 @@ public class Game2 extends AppCompatActivity {
         public void onReceive(Context context, Intent intent) {
             b4.setX(b4.getX() - 10);
             if (b4.getX() < 0) {
-                progress-=10;
-                progressBar.setProgress(progress);
+                gameover();
                 b4.setX(main.getWidth());
             }
         }
 
     };
+
+    private void gameover() {
+        progress-=10;
+        if(progress<=0){
+            score=score-1;
+            unregisterReceiver(receiver);
+            unregisterReceiver(receiver4);
+            unregisterReceiver(receiver5);
+            unregisterReceiver(receiver1);
+            unregisterReceiver(receiver3);
+            unregisterReceiver(receiver2);
+            unregisterReceiver(receiver6);
+            AlertDialog.Builder builder;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                builder = new AlertDialog.Builder(Game2.this, android.R.style.Theme_Material_Dialog_Alert);
+            } else {
+                builder = new AlertDialog.Builder(Game2.this);
+            }
+            builder.setTitle("Game Over")
+                    .setMessage("Your score = "+score)
+                    .setCancelable(false)
+                    .setNegativeButton("Exit", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            System.exit(0);
+                        }
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
+        }
+        progressBar.setProgress(progress);
+    }
 
     @Override
     protected void onResume() {
